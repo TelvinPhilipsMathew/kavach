@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/survey"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/gray"
+    tools:context=".ui.survey.SurveyFragment">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/progressLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:padding="@dimen/d2" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/questionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d2"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="start"
+        android:padding="@dimen/d2"
+        android:text="Question?"
+        android:lineSpacingExtra="1dp"
+        android:textColor="@android:color/primary_text_light"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:src="@drawable/question_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/answersRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/d2"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintTop_toBottomOf="@+id/questionTextView" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="@dimen/d1"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:animateLayoutChanges="true"
+        android:elevation="5dp"
+        app:cardCornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/navigationLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/d2"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/backButton"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="@dimen/d2"
+                android:layout_marginTop="@dimen/d2"
+                android:layout_marginEnd="@dimen/d1"
+                android:layout_marginBottom="@dimen/d1"
+                android:layout_weight="1"
+                android:background="@drawable/round_corner_button_bg"
+                android:fontFamily="@font/roboto_light"
+                android:text="@string/back"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/nextButton"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="@dimen/d1"
+                android:layout_marginTop="@dimen/d2"
+                android:layout_marginEnd="@dimen/d2"
+                android:layout_marginBottom="@dimen/d1"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:background="@drawable/round_corner_button_bg"
+                android:enabled="false"
+                android:fontFamily="@font/roboto_light"
+                android:text="@string/next"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/submitButton"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="@dimen/d1"
+                android:layout_marginTop="@dimen/d2"
+                android:layout_marginEnd="@dimen/d2"
+                android:layout_marginBottom="@dimen/d1"
+                android:layout_weight="1"
+                android:background="@drawable/round_corner_button_bg"
+                android:fontFamily="@font/roboto_light"
+                android:text="@string/submit"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

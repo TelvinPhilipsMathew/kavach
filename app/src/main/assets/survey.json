@@ -1,0 +1,64 @@
+[{
+  "question": "What is your age?",
+  "answers": [
+    {"option":"< 2 Years", "weight" : 0 },
+    {"option":"2 - 10 Years","weight" : 0 },
+    {"option":"11 - 20 Years","weight" : 0 },
+    {"option":"21 - 60 Years","weight" : 0 },
+    {"option":"> 60 Years","weight" : 0 }
+  ],
+  "isMultipleSelectionAllowed": false
+},
+  {
+    "question": "What is your gender?",
+    "answers": [
+      {"option":"Male","weight" : 0 },
+      {"option":"Female","weight" : 0 }
+    ],
+    "isMultipleSelectionAllowed": false
+  },
+  {
+    "question": "Do you have a history of travel to high risk COVID-19 affected countries, 14 days prior to symptom onset?",
+    "answers": [
+      {"option":"Yes","weight" : 3 },
+      {"option":"No","weight" : 0 }
+    ],
+    "isMultipleSelectionAllowed": false
+  },
+  {
+    "question": "Did you have a close contact with a confirmed/suspected case of COVID-19 in the 14 days prior to symptom onset?",
+    "answers": [
+      {"option":"Yes","weight" : 3 },
+      {"option":"No","weight" : 0 }
+    ],
+    "isMultipleSelectionAllowed": false
+  },
+  {
+    "question": "Are you a healthcare worker taking care of confirmer/suspected patients of COVID-19 ?",
+    "answers": [
+      {"option":"Yes","weight" : 3 },
+      {"option":"No","weight" : 0 }
+    ],
+    "isMultipleSelectionAllowed": false
+  },
+  {
+    "question": "Please check the symptoms that you are having ?",
+    "answers": [
+      {"option":"Fever","weight" : 1 },
+      {"option":"Dry Cough","weight" : 1 },
+      {"option":"Fatigue","weight" : 2 },
+      {"option":"Sputum","weight" : 0 },
+      {"option":"Shortness of breath","weight" : 2 },
+      {"option":"Sore Throat","weight" : 1 },
+      {"option":"Headache","weight" : 1 },
+      {"option":"Myalgia/arthralgia","weight" : 1 },
+      {"option":"Chills","weight" : 3 },
+      {"option":"Nausea or vomiting","weight" : 0 },
+      {"option":"Nasal","weight" : 0 },
+      {"option":"Diahorrea","weight" : 1 },
+      {"option":"Hemoptysis","weight" : 0 },
+      {"option":"Conjunctival congestion","weight" : 0 }
+    ],
+    "isMultipleSelectionAllowed": true
+  }
+]
