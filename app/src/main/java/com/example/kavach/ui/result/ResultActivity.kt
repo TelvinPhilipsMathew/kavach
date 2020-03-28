@@ -41,9 +41,15 @@ class ResultActivity : AppCompatActivity() {
             if (resultScore >= it.minScore && resultScore <= it.maxScore) {
                 riskDescription.text = it.description
                 riskTitle.text = it.risk
-                if(it.risk.toLowerCase() != "high") {
-                    riskTitle.setTextColor(ContextCompat.getColor(this, R.color.yellow))
+                when (it.risk.toLowerCase()) {
+                    "low" -> {
+                        riskTitle.setTextColor(ContextCompat.getColor(this, R.color.green))
+                    }
+                    "medium" -> {
+                        riskTitle.setTextColor(ContextCompat.getColor(this, R.color.orange))
+                    }
                 }
+                adviceDescription.text = adviceDescription.text.toString().format(it.description)
             }
         }
     }
