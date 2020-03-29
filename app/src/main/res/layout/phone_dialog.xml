@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:padding="@dimen/d3">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/phoneTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:padding="@dimen/d2"
+        android:text="@string/provide_phone"
+        android:textColor="@android:color/primary_text_light"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/phoneEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/d2"
+        android:layout_marginTop="@dimen/d1"
+        android:layout_marginEnd="@dimen/d2"
+        android:layout_marginBottom="@dimen/d1"
+        android:inputType="number"
+        android:hint="+91-999999999"
+        android:padding="@dimen/d2"
+        app:layout_constraintTop_toBottomOf="@+id/phoneTitle" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/submitButton"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="@dimen/d2"
+        android:layout_weight="1"
+        android:background="@drawable/round_corner_button_bg"
+        android:fontFamily="@font/roboto_light"
+        android:alpha="0.5"
+        android:enabled="false"
+        android:text="@string/submit"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/phoneEditText" />
+</androidx.constraintlayout.widget.ConstraintLayout>

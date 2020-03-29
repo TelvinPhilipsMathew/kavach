@@ -2,9 +2,12 @@ package com.example.kavach.ui.survey
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -13,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kavach.R
 import com.example.kavach.ui.result.ResultActivity
+import kotlinx.android.synthetic.main.phone_dialog.view.*
 import kotlinx.android.synthetic.main.survey_fragment.*
 
 
@@ -56,17 +60,23 @@ class SurveyFragment : Fragment(), ClickInteractionListener {
     }
 
     private fun handleBackgroundImage(index: Int?) {
-        backgroundImage.setImageDrawable( when (index) {
+        backgroundImage.setImageDrawable(
+            when (index) {
                 0 -> ContextCompat.getDrawable(
-                    context!!,R.drawable.question_1)
+                    context!!, R.drawable.question_1
+                )
                 1 -> ContextCompat.getDrawable(
-                    context!!,R.drawable.question_2)
+                    context!!, R.drawable.question_2
+                )
                 2 -> ContextCompat.getDrawable(
-                    context!!,R.drawable.question_3)
+                    context!!, R.drawable.question_3
+                )
                 3 -> ContextCompat.getDrawable(
-                    context!!,R.drawable.question_4)
+                    context!!, R.drawable.question_4
+                )
                 4 -> ContextCompat.getDrawable(
-                    context!!,R.drawable.question_5)
+                    context!!, R.drawable.question_5
+                )
                 else -> null
             }
         )
@@ -80,8 +90,7 @@ class SurveyFragment : Fragment(), ClickInteractionListener {
             viewModel.incrementCurrentIndex()
         }
         submitButton.setOnClickListener {
-            showProgress()
-            viewModel.submitClick(context)
+            showPhoneDialog()
         }
     }
 
@@ -92,13 +101,46 @@ class SurveyFragment : Fragment(), ClickInteractionListener {
 
     private fun observeSubmitForm() {
         viewModel.result.observe(activity!!, Observer {
-                hideProgress()
+            hideProgress()
             val intent = Intent(activity!!, ResultActivity::class.java)
             intent.putExtra(ResultActivity.RESULT, it)
             activity?.startActivity(intent)
-                activity?.finish()
-                viewModel.result.removeObservers(activity!!)
+            activity?.finish()
+            viewModel.result.removeObservers(activity!!)
         })
+    }
+
+    private fun showPhoneDialog() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(activity!!)
+        val dialogView: View =
+            LayoutInflater.from(activity!!).inflate(R.layout.phone_dialog, null, false)
+        builder.setView(dialogView)
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.setCancelable(false)
+        alertDialog.show()
+
+        dialogView.phoneEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (dialogView.phoneEditText.text.toString().length < 10) {
+                    dialogView.submitButton.alpha = 0.5f
+                    dialogView.submitButton.isEnabled = false
+                } else {
+                    dialogView.submitButton.alpha = 1f
+                    dialogView.submitButton.isEnabled = true
+                }
+            }
+        })
+        dialogView.submitButton.setOnClickListener {
+            showProgress()
+            viewModel.submitClick(context)
+            alertDialog.dismiss()
+        }
     }
 
     private fun hideProgress() {

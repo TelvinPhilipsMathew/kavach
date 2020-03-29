@@ -19,7 +19,7 @@ class HomeActivity : AppCompatActivity() {
             startActivity(Intent(this, SurveyActivity::class.java))
         }
         app_bar.addOnOffsetChangedListener(OnOffsetChangedListener { appBarLayout, verticalOffset ->
-            if (Math.abs(verticalOffset.toFloat()/appBarLayout.totalScrollRange.toFloat()) >= 0.5) {
+            if (Math.abs(verticalOffset.toFloat() / appBarLayout.totalScrollRange.toFloat()) >= 0.5) {
                 startSurvey.visibility = View.GONE
             } else {
                 startSurvey.visibility = View.VISIBLE
