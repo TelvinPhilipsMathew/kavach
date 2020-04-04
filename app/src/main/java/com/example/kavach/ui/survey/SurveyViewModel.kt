@@ -6,12 +6,10 @@ import android.os.Build
 import android.os.Build.VERSION_CODES
 import android.provider.Settings
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.example.kavach.api.ApiClientBuilder
-import com.example.kavach.api.ApiClientBuilder.Companion.BASE_URL
 import com.example.kavach.api.KavachApi
+import com.example.kavach.data.InitResponse
 import com.example.kavach.data.QuestionsList
 import com.example.kavach.data.SubmitFormRequest
 import com.example.kavach.repository.QuestionRepository
@@ -22,6 +20,7 @@ import retrofit2.Response
 
 class SurveyViewModel : ViewModel(), Callback<String> {
 
+    private var initResponse: InitResponse? = null
     private var country: String? = ""
     private var city: String? = ""
     private var longtitude: Double = 0.0
@@ -56,13 +55,13 @@ class SurveyViewModel : ViewModel(), Callback<String> {
         mutableCurrentIndex.value = mutableCurrentIndex.value?.plus(1)
     }
 
-    fun submitClick(phone: String, context: Context?) {
+    fun submitSurvey(phone: String, context: Context?) {
         val submitFormRequest = getSubmitFormRequest(phone, context)
         ApiClientBuilder().build().create(KavachApi::class.java).submitForm(submitFormRequest)
             .enqueue(this)
     }
 
-    private fun calculateScore(): Int {
+    fun calculateScore(): Int {
         var totalScore = 0
         for (question in questions) {
             question.selectedOptions.forEach {
@@ -125,5 +124,9 @@ class SurveyViewModel : ViewModel(), Callback<String> {
     fun setAddress(locality: String?, countryName: String?) {
         city = locality
         country = countryName
+    }
+
+    fun setInitResponse(initResponse: InitResponse?) {
+        this.initResponse = initResponse
     }
 }

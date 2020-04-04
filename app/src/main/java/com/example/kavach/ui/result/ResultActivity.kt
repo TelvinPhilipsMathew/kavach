@@ -5,13 +5,14 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.kavach.BaseActivity
 import com.example.kavach.KavachApplication
 import com.example.kavach.R
 import com.example.kavach.data.Results
 import kotlinx.android.synthetic.main.activity_result.*
 import kotlinx.android.synthetic.main.content_result.*
 
-class ResultActivity : AppCompatActivity() {
+class ResultActivity : BaseActivity() {
 
     companion object {
         const val RESULT = "RESULT"

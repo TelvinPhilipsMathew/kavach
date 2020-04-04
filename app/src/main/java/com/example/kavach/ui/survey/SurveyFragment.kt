@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kavach.KavachApplication
 import com.example.kavach.R
 import com.example.kavach.ui.result.ResultActivity
 import kotlinx.android.synthetic.main.phone_dialog.view.*
@@ -38,18 +39,18 @@ class SurveyFragment : Fragment(), ClickInteractionListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(activity!!).get(SurveyViewModel::class.java)
-
+        viewModel.setInitResponse((activity?.application as KavachApplication).initResponse)
         observeCurrentIndex()
         setClickListeners()
-        observeSubmitForm()
     }
 
     private fun observeCurrentIndex() {
-        viewModel.currentIndex.observe(activity!!, Observer<Int> {
+        viewModel.currentIndex.observe(activity!!, Observer {
             renderUi(it)
             if (it == viewModel.totalNumberOfQuestions - 1) {
                 submitButton.visibility = View.VISIBLE
                 nextButton.visibility = View.GONE
+                observeSubmitForm()
             } else {
                 submitButton.visibility = View.GONE
                 nextButton.visibility = View.VISIBLE
@@ -90,7 +91,16 @@ class SurveyFragment : Fragment(), ClickInteractionListener {
             viewModel.incrementCurrentIndex()
         }
         submitButton.setOnClickListener {
-            showPhoneDialog()
+            val calculateScore = viewModel.calculateScore()
+            val highestMinScore =
+                (activity!!.application as KavachApplication).initResponse?.results?.value?.last()?.min_score
+                    ?: 0
+            if (calculateScore > highestMinScore) {
+                showPhoneDialog()
+            } else {
+                showProgress()
+                viewModel.submitSurvey("", context)
+            }
         }
     }
 
@@ -116,6 +126,7 @@ class SurveyFragment : Fragment(), ClickInteractionListener {
             LayoutInflater.from(activity!!).inflate(R.layout.phone_dialog, null, false)
         builder.setView(dialogView)
         val alertDialog: AlertDialog = builder.create()
+        alertDialog.setCancelable(true)
         alertDialog.show()
 
         dialogView.phoneEditText.addTextChangedListener(object : TextWatcher {
@@ -137,8 +148,8 @@ class SurveyFragment : Fragment(), ClickInteractionListener {
         })
         dialogView.submitButton.setOnClickListener {
             showProgress()
-            viewModel.submitClick(dialogView.phoneEditText.text.toString(), context)
             alertDialog.dismiss()
+            viewModel.submitSurvey(dialogView.phoneEditText.text.toString(), context)
         }
     }
 
