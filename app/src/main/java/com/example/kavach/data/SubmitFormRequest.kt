@@ -16,9 +16,15 @@ class SubmitFormRequest {
     @SerializedName("healthcare_worker")
     lateinit var healthcareWorker: String
     @SerializedName("symptoms")
-    lateinit var symptoms: String
+    lateinit var symptoms: List<String>
     @SerializedName("rating")
     lateinit var rating: String
+    @SerializedName("phone")
+    lateinit var phone: String
+    @SerializedName("city")
+    lateinit var city: String
+    @SerializedName("country")
+    lateinit var country: String
     @SerializedName("device_id")
     lateinit var deviceId: String
     @SerializedName("location")

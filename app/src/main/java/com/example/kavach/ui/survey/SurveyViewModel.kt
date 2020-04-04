@@ -10,7 +10,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.kavach.api.ApiClientBuilder
-import com.example.kavach.api.QuestionApi
+import com.example.kavach.api.ApiClientBuilder.Companion.BASE_URL
+import com.example.kavach.api.KavachApi
 import com.example.kavach.data.QuestionsList
 import com.example.kavach.data.SubmitFormRequest
 import com.example.kavach.repository.QuestionRepository
@@ -21,6 +22,8 @@ import retrofit2.Response
 
 class SurveyViewModel : ViewModel(), Callback<String> {
 
+    private var country: String? = ""
+    private var city: String? = ""
     private var longtitude: Double = 0.0
     private var latitude: Double = 0.0
 
@@ -53,9 +56,9 @@ class SurveyViewModel : ViewModel(), Callback<String> {
         mutableCurrentIndex.value = mutableCurrentIndex.value?.plus(1)
     }
 
-    fun submitClick(context: Context?) {
-        val submitFormRequest = getSubmitFormRequest(context)
-        ApiClientBuilder().build().create(QuestionApi::class.java).submitForm(submitFormRequest)
+    fun submitClick(phone: String, context: Context?) {
+        val submitFormRequest = getSubmitFormRequest(phone, context)
+        ApiClientBuilder().build().create(KavachApi::class.java).submitForm(submitFormRequest)
             .enqueue(this)
     }
 
@@ -69,7 +72,7 @@ class SurveyViewModel : ViewModel(), Callback<String> {
         return totalScore
     }
 
-    private fun getSubmitFormRequest(context: Context?): SubmitFormRequest {
+    private fun getSubmitFormRequest(phone: String, context: Context?): SubmitFormRequest {
         var submitFormRequest = SubmitFormRequest()
         submitFormRequest.age = questions[0].selectedOptions[0].option
         submitFormRequest.gender = getValueForGenderQuestion(questions[1].selectedOptions[0].option)
@@ -80,11 +83,15 @@ class SurveyViewModel : ViewModel(), Callback<String> {
         submitFormRequest.healthcareWorker =
             getValueForYesOrNoQuestion(questions[4].selectedOptions[0].option)
         submitFormRequest.symptoms =
-            if (isAnswered(5)) questions[5].selectedOptions.map { it.option }.toString() else ""
+            if (isAnswered(5)) questions[5].selectedOptions.map { it.option } else listOf()
         submitFormRequest.session = getSession()
         submitFormRequest.deviceId =
             Settings.Secure.getString(context?.contentResolver, Settings.Secure.ANDROID_ID)
         submitFormRequest.location = listOf(latitude, longtitude)
+        submitFormRequest.rating = calculateScore().toString()
+        submitFormRequest.phone = phone
+        submitFormRequest.city = city.orEmpty()
+        submitFormRequest.country = country.orEmpty()
         return submitFormRequest
     }
 
@@ -113,5 +120,10 @@ class SurveyViewModel : ViewModel(), Callback<String> {
     fun setLatLong(latitude: Double, longitude: Double) {
         this.latitude = latitude
         this.longtitude = longitude
+    }
+
+    fun setAddress(locality: String?, countryName: String?) {
+        city = locality
+        country = countryName
     }
 }

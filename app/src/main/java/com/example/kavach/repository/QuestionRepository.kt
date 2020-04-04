@@ -5,5 +5,5 @@ import com.example.kavach.data.Results
 
 interface QuestionRepository {
     fun fetchQuestions(): List<QuestionsList>
-    fun fetchResults(): List<Results>
+    fun fetchResults(): Results
 }

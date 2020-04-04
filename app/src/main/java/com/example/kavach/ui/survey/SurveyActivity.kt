@@ -2,6 +2,8 @@ package com.example.kavach.ui.survey
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.provider.Settings
@@ -14,6 +16,8 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
 import kotlinx.android.synthetic.main.survey_activity.*
 import kotlinx.android.synthetic.main.survey_activity.toolbar
+import java.io.IOException
+import java.util.*
 
 class SurveyActivity : BaseActivity() {
 
@@ -57,6 +61,14 @@ class SurveyActivity : BaseActivity() {
                         requestNewLocationData(mLocationCallback)
                     } else {
                         viewModel.setLatLong(location.latitude, location.longitude)
+                        val geoCoder = Geocoder(this, Locale.getDefault())
+                        try {
+                            val addresses =
+                                geoCoder.getFromLocation(location.latitude, location.longitude, 1)
+                            viewModel.setAddress(addresses[0].locality, addresses[0].countryName)
+                        } catch (e1: IOException) {
+                            e1.printStackTrace();
+                        }
                     }
                 }
             } else {

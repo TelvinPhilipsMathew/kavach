@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.kavach.KavachApplication
 import com.example.kavach.R
 import com.example.kavach.data.Results
 import kotlinx.android.synthetic.main.activity_result.*
@@ -25,20 +26,19 @@ class ResultActivity : AppCompatActivity() {
         resultScore = intent.getIntExtra(RESULT, 0)
 
         viewModel = ViewModelProvider(this).get(ResultViewModel::class.java)
-        viewModel.onViewCreated(assets)
+        viewModel.onViewCreated(assets, (application as KavachApplication).initResponse)
         viewModel.resultLiveData.observe(this, Observer {
             renderUI(it)
         })
         btnClose.setOnClickListener {
             finish()
         }
-
     }
 
-    private fun renderUI(results: List<Results>?) {
-
-        results?.forEach {
-            if (resultScore >= it.minScore && resultScore <= it.maxScore) {
+    private fun renderUI(results: Results?) {
+        val valuesList = results?.value
+        valuesList?.forEach {
+            if (resultScore >= it.min_score && resultScore <= it.max_score) {
                 riskDescription.text = it.description
                 riskTitle.text = it.risk
                 when (it.risk.toLowerCase()) {
@@ -49,8 +49,11 @@ class ResultActivity : AppCompatActivity() {
                         riskTitle.setTextColor(ContextCompat.getColor(this, R.color.orange))
                     }
                 }
-                adviceDescription.text = adviceDescription.text.toString().format(it.description)
+                adviceTitle.text = it.instruction.title
+                adviceDescription.text = it.instruction.description
             }
         }
+        preventionTitle.text = results?.prevention?.title
+        preventionDescription.text = results?.prevention?.description
     }
 }

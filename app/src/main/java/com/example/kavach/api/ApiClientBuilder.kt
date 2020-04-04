@@ -9,7 +9,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ApiClientBuilder {
 
     companion object {
-        private const val BASE_URL = "https://kavachapi.herokuapp.com/api/v1/"
+        const val BASE_URL = "https://api.softwaremathematics.com/api/"
+
     }
 
     fun build(): Retrofit {

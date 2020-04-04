@@ -4,6 +4,7 @@ import android.content.res.AssetManager
 import com.example.kavach.data.QuestionsList
 import com.example.kavach.data.Results
 import com.example.kavach.utils.JsonUtil
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 
@@ -26,14 +27,9 @@ class QuestionRepositoryImpl constructor(private val assetsManager: AssetManager
         return gson.fromJson(surveyJSON, surveyListType)
     }
 
-    override fun fetchResults(): List<Results> {
+    override fun fetchResults(): Results {
 
         val resultJSON = JsonUtil.loadJSONFromAsset(assetsManager, RESULT_JSON_FILE_NAME)
-        val gson = GsonBuilder()
-            .excludeFieldsWithoutExposeAnnotation()
-            .create()
-        val resultListType = object : TypeToken<List<Results>>() {}.type
-
-        return gson.fromJson(resultJSON, resultListType)
+        return Gson().fromJson(resultJSON, Results::class.java)
     }
 }

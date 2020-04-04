@@ -116,7 +116,6 @@ class SurveyFragment : Fragment(), ClickInteractionListener {
             LayoutInflater.from(activity!!).inflate(R.layout.phone_dialog, null, false)
         builder.setView(dialogView)
         val alertDialog: AlertDialog = builder.create()
-        alertDialog.setCancelable(false)
         alertDialog.show()
 
         dialogView.phoneEditText.addTextChangedListener(object : TextWatcher {
@@ -138,7 +137,7 @@ class SurveyFragment : Fragment(), ClickInteractionListener {
         })
         dialogView.submitButton.setOnClickListener {
             showProgress()
-            viewModel.submitClick(context)
+            viewModel.submitClick(dialogView.phoneEditText.text.toString(), context)
             alertDialog.dismiss()
         }
     }

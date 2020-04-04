@@ -1,26 +1,48 @@
-[
-  {
-    "min_score": 0,
-    "max_score": 2,
-    "risk": "Low",
-    "description": "May be stress related and observe"
-  },
-  {
-    "min_score": 3,
-    "max_score": 5,
-    "risk": "Medium",
-    "description": "Hydrate properly and proper personal hygiene. Observe and Re-evaluate after 2 days"
-  },
-  {
-    "min_score": 6,
-    "max_score": 12,
-    "risk": "High",
-    "description": "Seek a consultation with Doctor"
-  },
-  {
-    "min_score": 13,
-    "max_score": 24,
-    "risk": "High",
-    "description": "Call the DOH Hotline 02-8-651-7800"
+{
+  "value": [
+    {
+      "min_score": 0,
+      "max_score": 2,
+      "risk": "Low",
+      "description": "May be stress related and observe",
+      "instruction": {
+        "title": "Based on your inputs, Kavach 24 X 7 advises the following:",
+        "description": "1. May be stress related and observe\n\n2. Prevention and precautions SEE BELOW\n\n3. Laboratory tests and imaging are optional (and as per your physician's advice)\n\n4. COVID19 testing may be required at your physician's advise"
+      }
+    },
+    {
+      "min_score": 3,
+      "max_score": 5,
+      "risk": "Medium",
+      "description": "Hydrate properly and proper personal hygiene. Observe and Re-evaluate after 2 days",
+      "instruction": {
+        "title": "Based on your inputs, Kavach 24 X 7 advises the following:",
+        "description": "1. Hydrate properly and proper personal hygiene. Observe and Re-evaluate after 2 days\n\n2. Prevention and precautions SEE BELOW\n\n3. Laboratory tests and imaging are optional (and as per your physician's advice)\n\n4. COVID19 testing may be required at your physician's advise"
+      }
+    },
+    {
+      "min_score": 6,
+      "max_score": 12,
+      "risk": "High",
+      "description": "Seek a consultation with Doctor",
+      "instruction": {
+        "title": "Based on your inputs, Kavach 24 X 7 advises the following:",
+        "description": "1. Seek a consultation with Doctor\n\n2. Prevention and precautions SEE BELOW\n\n3. Laboratory tests and imaging are optional (and as per your physician's advice)\n\n4. COVID19 testing may be required at your physician's advise"
+      }
+    },
+    {
+      "min_score": 13,
+      "max_score": 24,
+      "risk": "Very High",
+      "description": "Call the DOH Hotline +91-11-23978046",
+      "instruction": {
+        "title": "Based on your inputs, Kavach 24 X 7 advises the following:",
+        "description": "1. Call the DOH Hotline +91-11-23978046\n\n2. Prevention and precautions SEE BELOW\n\n3. Laboratory tests and imaging are optional (and as per your physician's advice)\n\n4. COVID19 testing may be required at your physician's advise"
+      }
+    }
+  ],
+  "prevention": {
+    "title": "Prevention and Precautions - Basic protective measures",
+    "description": "Be aware or Educate yourself with the latest updates on the following websites : WHO &amp; MoHFW\n\nMost people who become infected experienve mild illness and recover, but it can be more evere for others. Take care of your health and protect others by doing the following:\n\nWash your hands frequently\nRegularly and thoroughly clean your hands with an alcohol-base hand rub or wash them with soap and water.\n\nMaintain social distancing\nMaintain at least 2 metre (6 feet) distance between yourself and anyone who is coughin or sneezing.\n\nAvoid touching eyes, nose and mouth\nOur hands touch many surfaces and can pick up viruses. Once contaminated, hands can transfer the virus to your eyes, nose or mouth\n\nPractise respiratory hygiene\nMake sure you and the people around you, follow good respiratory hygiene. This means covering your mouth and nose with your bent elbow or tissue when you cough or sneeze. Then dispose of the used tissue immediately.\n\nIf you have fever, cough and difficulty in breathing, seek medical care early.\nStay home if you feel unwell. If you have a high fever moderate to severe cough and difficulty in breathing and it is worsening in short period of time, seek medical asistance and call in advance."
   }
-]
+}
